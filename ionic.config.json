@@ -1,0 +1,7 @@
+{
+  "name": "OnWheels",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
