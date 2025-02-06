@@ -1,17 +1,51 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-title>
-      Tab 3
-    </ion-title>
+    <ion-title>Spotřeba paliva</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 3</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content class="ion-padding">
+  <h2>Kalkulačka</h2>
 
-  <app-explore-container name="Tab 3 page"></app-explore-container>
+  <ion-item>
+    <ion-label position="stacked">Zadejte vzdálenost (km)</ion-label>
+    <ion-input type="number" [(ngModel)]="distance"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="stacked">Zadejte průměrnou spotřebu (ℓ/100 km)</ion-label>
+    <ion-input type="number" [(ngModel)]="consumption"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="stacked">Zadejte cenu paliva (Kč/ℓ)</ion-label>
+    <ion-input type="number" [(ngModel)]="fuelPrice"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-checkbox [(ngModel)]="returnTrip"></ion-checkbox>
+    <ion-label>Připočítat cestu zpět</ion-label>
+  </ion-item>
+
+  <ion-button expand="full" (click)="calculate()">Vypočítej to</ion-button>
+  <ion-button expand="full" color="medium" (click)="reset()">Vymazat</ion-button>
+
+  <h3>Průměrná spotřeba a cena paliva</h3>
+  <ion-grid>
+    <ion-row>
+      <ion-col><strong>Vzdálenost</strong></ion-col>
+      <ion-col><strong>Spotřeba (ℓ)</strong></ion-col>
+      <ion-col><strong>Cena (Kč)</strong></ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>{{ totalDistance }} km</ion-col>
+      <ion-col>{{ totalFuel.toFixed(2) }}</ion-col>
+      <ion-col>{{ totalCost.toFixed(2) }}</ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>1 km</ion-col>
+      <ion-col>{{ (totalFuel / totalDistance).toFixed(2) }}</ion-col>
+      <ion-col>{{ (totalCost / totalDistance).toFixed(2) }}</ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>
