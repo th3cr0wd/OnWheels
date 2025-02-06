@@ -1,17 +1,57 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-title>
-      Tab 1
-    </ion-title>
+    <ion-title>Moje cesty</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 1</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content class="ion-padding">
+  <h2>Vlož novou cestu</h2>
 
-  <app-explore-container name="Tab 1 page"></app-explore-container>
+  <ion-item>
+    <ion-label position="stacked">Datum</ion-label>
+    <ion-datetime [(ngModel)]="trip.date"></ion-datetime>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="stacked">Odkud jedeš</ion-label>
+    <ion-input type="text" [(ngModel)]="trip.from"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="stacked">Kam jedeš</ion-label>
+    <ion-input type="text" [(ngModel)]="trip.to"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="stacked">Ujetá vzdálenost (km)</ion-label>
+    <ion-input type="number" [(ngModel)]="trip.distance"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="stacked">Doba jízdy (min)</ion-label>
+    <ion-input type="number" [(ngModel)]="trip.duration"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="stacked">Průměrná rychlost (km/h)</ion-label>
+    <ion-input type="number" [(ngModel)]="trip.speed"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="stacked">Průměrná spotřeba (l/100 km)</ion-label>
+    <ion-input type="number" [(ngModel)]="trip.fuelConsumption"></ion-input>
+  </ion-item>
+
+  <ion-button expand="full" (click)="saveTrip()">Uložit cestu</ion-button>
+
+  <h2>Historie cest</h2>
+  <ion-list>
+    <ion-item *ngFor="let t of trips">
+      <ion-label>
+        <h3>{{ t.formattedDate }} - {{ t.from }} → {{ t.to }}</h3>
+        <p>{{ t.distance }} km, {{ t.formattedDuration }}, {{ t.fuelConsumption }} l/100km</p>
+      </ion-label>
+      <ion-button color="danger" (click)="deleteTrip(t)">Smazat</ion-button>
+    </ion-item>
+  </ion-list>
 </ion-content>
